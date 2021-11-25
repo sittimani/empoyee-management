@@ -1,0 +1,32 @@
+<form (ngSubmit)="form.valid && login()" #form="ngForm">
+    <table>
+        <tr>
+            <td colspan="2">Login</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="email" #email="ngModel" [(ngModel)]="model.email" emailValidator required></td>
+            <td>
+                <div *ngIf="email.touched && email.dirty" class="error-message">
+                    <span *ngIf="email?.errors?.required">Email is required</span>
+                    <span *ngIf="email?.errors?.invalidEmail">Invalid Email Address</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" required minlength="8"> </td>
+            <td>
+                <div *ngIf="password.touched && password.dirty" class="error-message">
+                    <span *ngIf="password?.errors?.required">Password is required</span>
+                    <span *ngIf="password?.errors?.minlength">Password shoul be minimum 8 characters</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">Login</button>
+            </td>
+        </tr>
+    </table>
+</form>

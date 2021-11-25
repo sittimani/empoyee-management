@@ -1,0 +1,78 @@
+<form [formGroup]="employeeForm" (ngSubmit)="submitForm()">
+    <table>
+        <tr>
+            <th colspan="2">Add New Employee</th>
+        </tr>
+
+        <tr>
+            <td>Name of the employee</td>
+            <td><input type="text" formControlName="name"></td>
+            <td>
+                <div *ngIf="controls.name?.touched" class="error-message">
+                    <span *ngIf="controls.name?.errors?.required">Name is Required</span>
+                    <span *ngIf="controls.name?.errors?.invalidName">Invalid Name</span>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Team of the employee</td>
+            <td><input type="text" formControlName="team"></td>
+            <td>
+                <div *ngIf="controls.team?.touched" class="error-message">
+                    <span *ngIf="controls.team?.errors?.required">Team is Required</span>
+                    <span *ngIf="controls.team?.errors?.invalidName">Invalid Name</span>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Mail Id</td>
+            <td><input type="text" formControlName="mailId"></td>
+            <td>
+                <button type="button" (click)="addEmail()">add email</button>
+            </td>
+            <td>
+                <div *ngIf="controls.mailId?.touched" class="error-message">
+                    <span *ngIf="controls.mailId?.errors?.required">MailID is Required</span>
+                    <span *ngIf="controls.mailId?.errors?.invalidEmail">Invalid mail id</span>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Confirm Mail Id</td>
+            <td><input type="text" formControlName="confirmMailId"></td>
+            <td>
+                <div *ngIf="controls.confirmMailId?.touched" class="error-message">
+                    <span *ngIf="controls.confirmMailId?.errors?.required">Confirm Password required</span>
+                    <span *ngIf="controls.confirmMailId?.errors?.misMatch">Mail id not match</span>
+                </div>
+            </td>
+        </tr>
+
+        <ng-container formArrayName="optionalemail">
+            <tr *ngFor="let emails of optionalEmailControl;let i=index;">
+                <td>Alternative email {{i + 1}}</td>
+                <td>
+                    <input type="email" [formControlName]="i">
+                </td>
+                <td>
+                    <button type="button" (click)="remove(i)">remove</button>
+                </td>
+                <td>
+                    <div *ngIf="optionalEmailControl[i].touched" class="error-message">
+                        <span *ngIf="optionalEmailControl[i]?.errors?.required ">Alternative email is Required or remove
+                            this
+                            field</span>
+                        <span *ngIf="optionalEmailControl[i]?.errors?.invalidEmail">Invalid mail id</span>
+                    </div>
+                </td>
+            </tr>
+        </ng-container>
+
+        <tr>
+            <td colspan="2 "><button type="submit">Add User</button></td>
+        </tr>
+    </table>
+</form>
