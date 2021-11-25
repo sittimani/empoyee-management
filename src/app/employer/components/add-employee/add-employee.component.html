@@ -1,4 +1,4 @@
-<form [formGroup]="employeeForm" (ngSubmit)="submitForm()">
+<form [formGroup]="employeeForm" (ngSubmit)="employeeForm.valid && submitForm()">
     <table>
         <tr>
             <th colspan="2">Add New Employee</th>

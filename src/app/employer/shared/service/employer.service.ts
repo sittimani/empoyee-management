@@ -13,6 +13,20 @@ export class EmployerService {
       experience: 2,
       team: "MEAN",
       password: "12345678"
+    },
+    {
+      name: "mk",
+      email: "mani@aspiresys.com",
+      experience: 2,
+      team: "MEAN",
+      password: "12345678"
+    },
+    {
+      name: "mkd",
+      email: "mani@aspiresys.com",
+      experience: 2,
+      team: "MEAN",
+      password: "12345678"
     }
   ]
 

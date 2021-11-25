@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from 'src/app/shared/service/data.service';
 import { Employee } from '../../shared/interface/employee.interface';
 import { EmployeeService } from '../../shared/service/employee.service';
 
@@ -11,10 +12,23 @@ import { EmployeeService } from '../../shared/service/employee.service';
 export class EmployeeListComponent implements OnInit {
 
 
-  headers = ["name", "team", "mailId", "alternateMailId"]
+  headers = ["name", "team"]
   items!: Employee[]
 
-  constructor(private employeeService: EmployeeService, private activatedRoute: ActivatedRoute) {
+
+  detailedHeaders: string[] = []
+  detailedItems: Employee[] = []
+  isDetailedView = false
+
+  isViewOption = true
+
+  constructor(
+    private employeeService: EmployeeService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private dataService: DataService
+  ) { 
+    this.dataService.setHeader("Employee List")
   }
 
   ngOnInit(): void {
@@ -26,5 +40,17 @@ export class EmployeeListComponent implements OnInit {
   delete(index: number) {
     this.employeeService.removeEmployee(index)
   }
+
+  viewData(index: number) {
+    this.router.navigate(['somewhere'], {relativeTo: this.activatedRoute})
+    this.isDetailedView = true
+    this.detailedHeaders = ["name", "team", "mailId", "alternateMailId"]
+    this.detailedItems = [this.items[index]]
+  }
+
+  hideView() {
+    this.isDetailedView = false
+  }
+
 
 }

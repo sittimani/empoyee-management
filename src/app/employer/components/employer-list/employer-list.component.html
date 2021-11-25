@@ -1,3 +1,12 @@
-<h4>Employer List</h4>
+<div>
+    <a routerLink="notice">See Notices</a>
+</div>
 
-<app-table [headers]="headers" [items]="items"></app-table>
+<app-table [headers]="headers" [items]="items" [isViewOption]="isViewOption" (viewEvent)="viewData($event)"></app-table>
+
+<ng-container *ngIf="isDetailedView">
+    <hr>
+    <app-table [headers]="detailedHeaders" [items]="detailedItems"></app-table>
+</ng-container>
+
+<router-outlet></router-outlet>

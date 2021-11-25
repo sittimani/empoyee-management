@@ -1,3 +1,10 @@
-<h4>Employee List</h4>
+<app-table [headers]="headers" [items]="items" (deleteEvent)="delete($event)" [isDeleteOption]="true" [isViewOption]="isViewOption" (viewEvent)="viewData($event)">
+</app-table>
 
-<app-table [headers]="headers" [items]="items" (deleteEvent)="delete($event)" [isDeleteOption]="true"></app-table>
+<ng-container *ngIf="isDetailedView">
+    <hr>
+    <button (click)="hideView()">Hide</button>
+    <app-table [headers]="detailedHeaders" [items]="detailedItems"></app-table>
+</ng-container>
+
+<router-outlet></router-outlet>

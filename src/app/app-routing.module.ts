@@ -6,6 +6,7 @@ import { EmployeeListComponent } from './employee/components/employee-list/emplo
 import { EmployeeResolver } from './employee/shared/resolver/employee.resolver';
 import { AddEmployeeComponent } from './employer/components/add-employee/add-employee.component';
 import { EmployerListComponent } from './employer/components/employer-list/employer-list.component';
+import { EventsComponent } from './employer/components/events/events.component';
 import { EmployerResolver } from './employer/shared/resolver/employer.resolver';
 import { LoginComponent } from './user-management/components/login/login.component';
 
@@ -13,15 +14,21 @@ const routes: Routes = [
   {
     path: "",
     component: LoginComponent
-  }, 
+  },
   {
     path: "employer-list",
     component: EmployerListComponent,
-
     canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     resolve: {
       employers: EmployerResolver
-    }
+    },
+    children: [
+      {
+        path: "notice",
+        component: EventsComponent
+      }
+    ]
   },
   {
     path: "employee-list",
@@ -34,7 +41,8 @@ const routes: Routes = [
   {
     path: "add-employee",
     component: AddEmployeeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    canDeactivate: [AuthGuard]
   }
 ];
 

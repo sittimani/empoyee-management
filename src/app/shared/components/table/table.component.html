@@ -1,3 +1,4 @@
+<h4 *ngIf="!noHeading">{{heading}}</h4>
 <table>
     <tr>
         <th *ngFor="let header of headers">{{header}}</th>
@@ -6,5 +7,6 @@
     <tr *ngFor="let item of items; index as i">
         <td *ngFor="let header of headers"> {{item[header]}} </td>
         <td *ngIf="isDeleteOption"><button (click)="delete(i)">Delete</button></td>
+        <td *ngIf="isViewOption"><button (click)="viewData(i)">View</button></td>
     </tr>
 </table>

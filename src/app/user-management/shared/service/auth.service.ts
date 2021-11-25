@@ -20,7 +20,7 @@ export class AuthService {
   }
 
   loggedIn() {
-    localStorage.setItem("loggedin", "true")
+    localStorage.setItem("loggedin", "Employer")
     this.userStateChange(true)
   }
 
